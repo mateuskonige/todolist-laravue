@@ -1,7 +1,7 @@
 <template>
     <div class="addItem">
-        <input type="text" v-model="item.name">
-        <button :class="[item.name ? 'active' : 'inactive']" @click="saveItem">Add</button>
+        <input type="text" v-model="item.name" placeholder="ex.: Tirar o lixo hoje">
+        <button :class="[item.name ? 'active' : 'inactive']" @click="saveItem">Adicionar</button>
     </div>
 </template>
 
@@ -26,6 +26,7 @@
                 .then(response => {
                     if(response.status == 201) {
                         this.item.name = "";
+                        this.$emit('reloadList');
                     }
                 })
                 .catch(error => {
@@ -60,7 +61,6 @@ input {
     outline: none;
     border: none;
     margin-left: 1rem;
-    font-weight: bold;
 }
 
 .inactive {
